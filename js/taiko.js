@@ -1,7 +1,6 @@
 /**
  * Created by yuanyaoqi on 16/7/27.
  */
-import {isMobile} from 'react-device-detect';
 var username;
 var taikoList = []; // 鼓点数组
 // 鼓点类型常量
@@ -32,7 +31,7 @@ var bgTravel = document.getElementById("bg_travel");
 
 // 页面加载后播放背景音乐
 window.onload = function() {
-    setLandscapeMode;
+    //  setLandscapeMode;
     document.getElementById("bgmusic").play();
     bgTravel.addEventListener('ended', function() {
         // 检查 taikoEnd 是否为 true
@@ -388,7 +387,9 @@ function queryScore() {
         });
     });
 }
-
+function isMobile() { 
+    return ('ontouchstart' in document.documentElement); 
+  }
 
 function setLandscapeMode() {
     if (isMobile()) {
