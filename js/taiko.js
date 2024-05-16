@@ -31,7 +31,7 @@ var bgTravel = document.getElementById("bg_travel");
 
 // 页面加载后播放背景音乐
 window.onload = function() {
-    setLandscapeMode();
+    updateOrientation();
     document.getElementById("bgmusic").play();
     bgTravel.addEventListener('ended', function() {
         // 检查 taikoEnd 是否为 true
@@ -410,14 +410,3 @@ function isMobile() {
         }
     }
 }
-
-function forceLandscapeScreenHandle() {
-    const body = document.getElementsByTagName('body')[0];
-    const html = document.getElementsByTagName('html')[0];
-    const width = html.clientWidth;
-    const height = html.clientHeight;
-    const max = width > height ? width : height;
-    const min = width > height ? height : width;
-    body.style.width = max + "px";
-    body.style.height = min + "px";
-  }
