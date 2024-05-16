@@ -407,12 +407,12 @@ function isMobile() {
     if (isMobile()) {
         if (window.innerHeight > window.innerWidth) {
             // Portrait mode on mobile
-            document.getElementById('body').classList.remove('normal');
-            document.getElementById('body').classList.add('landscape');
+            document.getElementById('content').classList.remove('normal');
+            document.getElementById('content').classList.add('landscape');
         } else {
             // Landscape mode on mobile
-            document.getElementById('body').classList.remove('landscape');
-            document.getElementById('body').classList.add('normal');
+            document.getElementById('content').classList.remove('landscape');
+            document.getElementById('content').classList.add('normal');
         }
     }
 }
