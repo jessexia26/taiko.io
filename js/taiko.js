@@ -392,7 +392,13 @@ function isMobile() {
     if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
         return true;
     } else {
-        return false;
+        if (window.screen.width < 500){
+            return true;
+        }
+        else{
+            return false;
+        }
+
     }
     
   }
