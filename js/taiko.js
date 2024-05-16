@@ -398,6 +398,17 @@ function isMobile() {
 
 function setLandscapeMode() {
     if (isMobile()) {
-        document.getElementById('body').classList.add('landscape');
+        window.addEventListener("resize", this.forceLandscapeScreenHandle);
     }
 }
+
+function forceLandscapeScreenHandle() {
+    const body = document.getElementsByTagName('body')[0];
+    const html = document.getElementsByTagName('html')[0];
+    const width = html.clientWidth;
+    const height = html.clientHeight;
+    const max = width > height ? width : height;
+    const min = width > height ? height : width;
+    body.style.width = max + "px";
+    body.style.height = min + "px";
+  }
