@@ -41,6 +41,7 @@ window.onload = function() {
         }
     }, false);
 };
+window.onresize = updateOrientation;
 
 // 开始游戏
 function gameStart() {
@@ -396,9 +397,17 @@ function isMobile() {
     
   }
 
-function setLandscapeMode() {
+  function updateOrientation() {
     if (isMobile()) {
-        window.addEventListener("resize", this.forceLandscapeScreenHandle);
+        if (window.innerHeight > window.innerWidth) {
+            // Portrait mode on mobile
+            document.getElementById('body').classList.remove('normal');
+            document.getElementById('body').classList.add('landscape');
+        } else {
+            // Landscape mode on mobile
+            document.getElementById('body').classList.remove('landscape');
+            document.getElementById('body').classList.add('normal');
+        }
     }
 }
 
