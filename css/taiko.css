@@ -14,7 +14,7 @@ body {
     font-family: 'Long Cang', cursive;
     width: 100%;
     height: 100%;
-
+}
 .landscape {
     transform: rotate(90deg);
     transform-origin: left top;
