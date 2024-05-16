@@ -7,10 +7,14 @@ body {
     font-family: 'Long Cang', cursive;
 }
 
-.long-cang-regular {
-    font-family: 'Long Cang', cursive;
-    font-weight: 400;
-    font-style: normal;
+.landscape {
+    transform: rotate(90deg);
+    transform-origin: left top;
+    width: 100vh;
+    height: 100vw;
+    position: absolute;
+    top: 100%;
+    left: 0;
 }
 
 /* 开始界面 */

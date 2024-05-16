@@ -387,3 +387,15 @@ function queryScore() {
         });
     });
 }
+
+function isMobile() {
+    return /Mobi|Android|iPhone|iPad|Windows Phone/i.test(navigator.userAgent);
+}
+
+function setLandscapeMode() {
+    if (isMobile()) {
+        document.getElementById('content').classList.add('landscape');
+    }
+}
+
+window.onload = setLandscapeMode;
