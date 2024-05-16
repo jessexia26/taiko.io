@@ -10,7 +10,7 @@
 </head>
 <body>
 <div id="startBox">
-    <img src="img/xia_title.png" alt="">
+    <img src="img/title.png" alt="">
     <div>
         <input type="text" placeholder="请输入昵称" id="username">
         <h4></h4>
@@ -22,7 +22,17 @@
     <button onclick="gamePlay()">我知道啦~</button>
 </div>
 <div id="taikoBox">
-    <div id="head"></div>
+    <div id="head">
+        <div id="gameChoices">
+            <button onclick="gamePause()" id="pausebutton">暂停</button>
+            <button onclick="gameEnd()" id="stopbutton">停止</button>
+            <select id="songSelect"> 
+                <option value="song1">歌曲1</option>
+                <option value="song2">歌曲2</option>
+                <option value="song3">歌曲3</option>
+            </select>
+        </div>
+    </div>
     <div id="middle">
         <div id="theIcon">
             <h1 id="scoreBoard">0</h1>
@@ -42,27 +52,24 @@
     </div>
     <div id="foot">
         <div id="pauseChoice">
-        <button onclick="gamePlay()" id="restartButton">重新开始</button>
-        <button onclick="gameContinue()" id="continueButton">继续游戏</button>
+            <button onclick="gamePlay()" id="restartButton">重新开始</button><br>
+            <button onclick="gameContinue()" id="continueButton">继续游戏</button>
         </div>
-        <button onclick="gamePause()" id="pausebutton">暂停</button>
         <div id="controlButtons">
             <button class="controlButton" id="buttonC" onclick="simulateKeyPress(67)">C</button>
             <button class="controlButton" id="buttonV" onclick="simulateKeyPress(86)">V</button>
             <button class="controlButton" id="buttonB" onclick="simulateKeyPress(66)">B</button>
             <button class="controlButton" id="buttonN" onclick="simulateKeyPress(78)">N</button>
         </div>
+        <canvas id="dancerCtx" width="900" height="260"></canvas>
     </div>
 </div>
 <div id="endBox">
     <h1>最后得分</h1>
-    <table id="scoreRank">
-    <tr><td><div id="firstIcon"></div></td><td>暂无</td><td>暂无</td></tr>
-    <tr><td><div id="secondIcon"></div></td><td>暂无</td><td>暂无</td></tr>
-    <tr><td><div id="thirdIcon"></div></td><td>暂无</td><td>暂无</td></tr>
-    </table>
+    <div id="scoreRank">
+        <!-- 这里会显示用户名、分数和音乐名称 -->
+    </div>
     <button onclick="gamePlay()" id="restartButton">再玩一局</button>
-
 </div>
 <div id="theSource">
     <img src="img/taikocomb.png" alt="" id="taikoComb">

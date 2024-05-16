@@ -84,6 +84,7 @@ body {
     height: 510px;
     position: absolute;
     border: 2px solid rgba(50,50,50,.6);
+    background-color: rgba(50,50,50,.6);
     display: none;
     font-family: 'Long Cang', cursive; /* 确保规则框使用正确字体 */
 }
@@ -93,14 +94,15 @@ body {
 }
 #ruleBox > button {
     width: 200px;
-    height: 70px;
-    font-size: 35px;
-    line-height: 70px;
+    height: 60px;
+    font-size: 25px;
+    line-height: 60px;
     text-align: center;
     font-weight: 900;
     background-color: white;
     color: black;
     border-radius: 10px;
+    border-color: transparent;
     position: absolute;
     left: 350px;
     top: 370px;
@@ -125,7 +127,52 @@ body {
 /* 头部 */
 #head {
     height: 120px;
-    background-image: url(../img/headbg1.png);
+    background-image: url(../img/footbg.png);
+    position: relative;
+
+}
+/* 游戏选项框 */
+#gameChoices {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    position: absolute;
+    z-index: 20;
+    top: 0;
+    width: 100%; /* 确保子元素水平排列 */
+}
+/* 歌曲选择下拉菜单 */
+#songSelect {
+    font-size: 20px;
+    height: 40px;
+    line-height: 40px;
+    padding: 5px;
+    margin: 0 10px;
+    border-radius: 5px;
+    font-family: 'Long Cang', cursive;
+    background-color: rgba(50, 50, 50, .7);
+    color: white;
+}
+/* 暂停和停止按钮 */
+#pausebutton, #stopbutton {
+    width: 80px;
+    height: 40px;
+    line-height: 40px;
+    font-size: 20px;
+    text-align: center;
+    color: white;
+    background-color: rgba(50, 50, 50, .7);
+    border: none;
+    border-radius: 5px;
+    margin: 0 10px;
+    font-family: 'Long Cang', cursive;
+}
+
+#pausebutton:hover, #stopbutton:hover {
+    cursor: pointer;
+    background-color: #f64826;
+    color: white;
 }
 
 /* 中部 */
@@ -148,6 +195,7 @@ body {
     line-height: 30px;
     border-bottom-right-radius: 14px;
     font-family: 'Long Cang', cursive; /* 确保记分板使用正确字体 */
+    font-size: 30;
     display: inline-block;
     margin: 0px;
     padding-right: 10px;
@@ -207,6 +255,8 @@ body {
 #roadCtx {
     position: absolute;
     left: 255px;
+    font-size: 30px;
+    font-family: 'Long Cang', cursive; /* 确保记分板使用正确字体 */
 }
 
 /* 底部 */
@@ -234,7 +284,7 @@ body {
     border: none;
     cursor: pointer;
     outline: none;
-    font-family: 'Long Cang', cursive; /* 确保控制按钮使用正确字体 */
+    font-family:  'Long Cang', cursive;
 }
 #buttonC, #buttonN {
     background-color: rgb(55, 152, 243);
@@ -248,28 +298,6 @@ body {
     filter: brightness(1.2);
 }
 
-/* 暂停 */
-#pausebutton {
-    position: absolute;
-    width: 80px;
-    height: 40px;
-    line-height: 40px;
-    font-size: 20px;
-    text-align: center;
-    left: 10px;
-    top: 10px;
-    color: white;
-    background-color: rgba(50,50,50,.7);
-    border: none;
-    border-radius: 5px;
-    z-index: 12;
-    font-family: 'Long Cang', cursive; 
-}
-#pausebutton:hover {
-    cursor: pointer;
-    background-color: #f64826;
-    color: white;
-}
 #pauseChoice {
     width: 700px;
     height: 310px;
@@ -310,58 +338,41 @@ body {
     border: 20px solid rgba(50,50,50,.7);
     display: none;
     background-image: url(../img/endbg.jpg);
-    background-size: cover;
     text-align: center;
     font-family: 'Long Cang', cursive; /* 确保结束框使用正确字体 */
 }
-#firstIcon {
-    width: 30px;
-    height: 22px;
-    background-image: url(../img/clearmark.png);
-    background-position: -107px;
-    display: inline-block;
-}
-#secondIcon {
-    width: 28px;
-    height: 22px;
-    background-image: url(../img/clearmark.png);
-    background-position: -80px;
-    display: inline-block;
-}
-#thirdIcon {
-    width: 30px;
-    height: 22px;
-    background-image: url(../img/clearmark.png);
-    background-position: -51px;
-    display: inline-block;
-}
-#endBox table {
-    font-size: 20px;
-}
-#endBox td {
-    width: 120px;
-    height: 30px;
-    margin: 5px;
-}
-#endBox > div {
+
+#endBox > button {
     width: 200px;
-    height: 50px;
-    font-size: 30px;
+    height: 60px;
+    font-size: 25px;
+    line-height: 60px;
+    text-align: center;
+    font-weight: 900;
+    background-color: white;
+    color: black;
+    border-radius: 10px;
+    border-color: transparent;
+    font-family: 'Long Cang', cursive; /* Ensure the button uses the correct font */
+    margin-bottom: 20px; /* Add some space at the bottom */
+}
+#endBox > button:hover {
+    cursor: pointer;
+    background-color: #f64826;
+    color: white;
+}
+
+/* Div inside the endBox */
+#endBox > div {
+    font-size: 20px;
     line-height: 50px;
     text-align: center;
     font-weight: 900;
     background-color: rgba(50,50,50,.7);
     color: white;
     border-radius: 10px;
-    position: absolute;
-    left: 390px;
-    top: 350px;
-    z-index: 20;
-}
-#endBox > div:hover {
-    cursor: pointer;
-    background-color: #f64826;
-    color: white;
+    border-color: transparent;
+    margin: auto 0; /* Center vertically */
 }
 
 /* 图片资源 */

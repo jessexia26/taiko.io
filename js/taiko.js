@@ -25,12 +25,21 @@ var taikoValueList = [
 // 鼓点次序
 var taikoValueOrder = 0;
 var scoreNumber = 0; // 分数
-var taikoCreat, taikoMove, dancerMove;
+var taikoCreat, taikoMove;
 var dancerList = [];
+var taikoEnd = false;
+var bgTravel = document.getElementById("bg_travel");
 
 // 页面加载后播放背景音乐
 window.onload = function() {
     document.getElementById("bgmusic").play();
+    bgTravel.addEventListener('ended', function() {
+        // 检查 taikoEnd 是否为 true
+        if (taikoEnd === true) {
+            // 调用 gameEnd 函数
+            gameEnd();
+        }
+    }, false);
 };
 
 // 开始游戏
@@ -56,7 +65,6 @@ function gamePlay() {
     taikoValueOrder = 0;
     clearInterval(taikoCreat);
     clearInterval(taikoMove);
-    clearInterval(dancerMove);
     scoreNumber = 0;
     document.getElementById("scoreBoard").innerHTML = scoreNumber;
     document.getElementById("pauseChoice").style.display = "none";
@@ -65,9 +73,9 @@ function gamePlay() {
     document.getElementById("endmusic").pause();
     document.getElementById("gamestart").play();
     setTimeout(function() {
-        document.getElementById("bg_travel").currentTime = 0;
-        document.getElementById("bg_travel").play();
-    }, 2000);
+        bgTravel.currentTime = 0;
+        bgTravel.play();
+    }, 1000);
 
     // 太鼓鼓点生成和移动
     var roadCtx = document.getElementById("roadCtx").getContext("2d");
@@ -80,20 +88,13 @@ function gamePlay() {
             taikoListMove(roadCtx);
         }, 1);
     }, 770);
-
-    // 音乐播放完毕后执行结束函数
-    setTimeout(function() {
-        gameEnd();
-        saveScore();
-    }, 145000);
 }
 
 // 暂停游戏
 function gamePause() {
     clearInterval(taikoCreat);
     clearInterval(taikoMove);
-    clearInterval(dancerMove);
-    document.getElementById("bg_travel").pause();
+    bgTravel.pause();
     document.getElementById("pauseChoice").style.display = "block";
 }
 
@@ -108,7 +109,7 @@ function gameContinue() {
     taikoMove = setInterval(function() {
         taikoListMove(roadCtx);
     }, 1);
-    document.getElementById("bg_travel").play();
+    bgTravel.play();
 }
 
 // 模拟键盘按键
@@ -170,6 +171,10 @@ document.onkeyup = function(event) {
 // 创建太鼓鼓点
 function creatTaiko(ctx, imgnode) {
     var newTaiko;
+    if (taikoValueOrder >= taikoValueList.length) {
+        clearInterval(taikoCreat);
+        return;
+    }
     if (taikoValueList[taikoValueOrder] == 0) {
         taikoValueOrder++;
         return;
@@ -226,8 +231,8 @@ function taikoPrototype(ctx, imgnode, value, drawY, text) {
         this.ctx.beginPath();
         this.ctx.drawImage(this.imgNode, this.cutX, this.cutY, this.cutW, this.cutW, this.drawX, this.drawY, this.drawW, this.drawW);
         this.ctx.stroke();
-        this.ctx.fillStyle = "black";
-        this.ctx.font = "16px 微软雅黑";
+        this.ctx.fillStyle = "white";
+        this.ctx.font="30px Long Cang";
         this.ctx.fillText(text, this.drawX + this.drawW / 2 - 18, 113);
     }
     this.move = function() {
@@ -243,8 +248,13 @@ function taikoListMove(ctx) {
             taikoList[i].draw();
             taikoList[i].move();
         } else {
-            taikoList.splice(0, 1);
+            taikoList.splice(i, 1);
+            i--; // 确保删除后不跳过下一个元素
         }
+    }
+    // 检查是否所有鼓点已经移出屏幕并且taikoValueList已经遍历完毕
+    if (taikoList.length === 0 && taikoValueOrder >= taikoValueList.length) {
+        taikoEnd = true;
     }
 }
 
@@ -333,10 +343,11 @@ function imgDisAppear(img) {
 function gameEnd() {
     clearInterval(taikoCreat);
     clearInterval(taikoMove);
-    clearInterval(dancerMove);
     document.getElementById("taikoBox").style.display = "none";
     document.getElementById("endBox").style.display = "block";
-    document.getElementById("bg_travel").pause();
+    // 停止播放
+    bgTravel.pause();
+    bgTravel.currentTime = 0;
     document.getElementById("endmusic").play();
     queryScore();
 }
@@ -345,12 +356,12 @@ function gameEnd() {
 function saveScore() {
     var db = openDatabase("demo100", "", "", 1024 * 1024 * 10);
     db.transaction(function(tx) {
-        tx.executeSql("create table if not exists scoreRank(username varchar(50), score varchar(50))");
+        tx.executeSql("create table if not exists scoreRank(username varchar(50), score varchar(50), musicname varchar(50))");
     }, function(trans, err) {
         console.log(err);
     });
     db.transaction(function(tx) {
-        tx.executeSql("insert into scoreRank values(?, ?)", [username, scoreNumber]);
+        tx.executeSql("insert into scoreRank values(?, ?, ?)", [username, scoreNumber, "少年画像"]);
     }, function(trans, err) {
         console.log(trans);
         console.log(err);
@@ -366,25 +377,12 @@ function queryScore() {
         tx.executeSql("select * from scoreRank order by score desc", [], function(trans, rs) {
             console.log(rs.rows.length);
             if (rs.rows.length == 0) {
-                return;
-            } else if (rs.rows.length == 1) {
-                document.getElementById("scoreRank").innerHTML = '<tr><td><div id="firstIcon"></div></td><td>' +
-                    rs.rows[0].username + '</td><td>' + rs.rows[0].score + '</td></tr>' +
-                    '<tr><td><div id="secondIcon"></div></td><td>暂无</td><td>暂无</td></tr>' +
-                    '<tr><td><div id="thirdIcon"></div></td><td>暂无</td><td>暂无</td></tr>';
-            } else if (rs.rows.length == 2) {
-                document.getElementById("scoreRank").innerHTML = '<tr><td><div id="firstIcon"></div></td><td>' +
-                    rs.rows[0].username + '</td><td>' + rs.rows[0].score + '</td></tr>' +
-                    '<tr><td><div id="secondIcon"></div></td><td>' +
-                    rs.rows[1].username + '</td><td>' + rs.rows[1].score + '</td></tr>' +
-                    '<tr><td><div id="thirdIcon"></div></td><td>暂无</td><td>暂无</td></tr>';
-            } else if (rs.rows.length > 2) {
-                document.getElementById("scoreRank").innerHTML = '<tr><td><div id="firstIcon"></div></td><td>' +
-                    rs.rows[0].username + '</td><td>' + rs.rows[0].score + '</td></tr>' +
-                    '<tr><td><div id="secondIcon"></div></td><td>' +
-                    rs.rows[1].username + '</td><td>' + rs.rows[1].score + '</td></tr>' +
-                    '<tr><td><div id="thirdIcon"></div></td><td>' +
-                    rs.rows[2].username + '</td><td>' + rs.rows[2].score + '</td></tr>';
+                document.getElementById("scoreRank").innerHTML = '<p>暂无记录</p>';
+            } else {
+                document.getElementById("scoreRank").innerHTML = '';
+                for (var i = 0; i < rs.rows.length; i++) {
+                    document.getElementById("scoreRank").innerHTML += '<p>用户名: ' + rs.rows[i].username + ', 分数: ' + rs.rows[i].score + ', 音乐: ' + rs.rows[i].musicname + '</p>';
+                }
             }
         });
     });
