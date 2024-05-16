@@ -392,6 +392,6 @@ function queryScore() {
 
 function setLandscapeMode() {
     if (isMobile()) {
-        document.getElementById('content').classList.add('landscape');
+        document.getElementById('body').classList.add('landscape');
     }
 }
