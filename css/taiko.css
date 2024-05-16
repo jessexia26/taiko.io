@@ -3,7 +3,7 @@ body{
     background-image: url(../img/xia_bg.jpg);
     background-repeat: no-repeat;
     background-position:-200px -100px;
-    font-family: "Long Cang"；
+    font-family: 'Long Cang', cursive;
 }
 
 .long-cang-regular {
@@ -23,6 +23,7 @@ body{
     background-color: transparent;/*url(../img/startbg.jpg);*/
     background-size: cover;
     background-position: 0px -50px;
+    font-family: 'Long Cang', cursive;
 }
 #startBox img{
     width: 600px;
@@ -55,6 +56,8 @@ body{
     position: absolute;
     left: 100px;
     top: 60px;
+    font-family: 'Long Cang', cursive;
+
 }
 #startBox>div>div{
     width: 200px;
@@ -84,6 +87,7 @@ body{
     position: absolute;
     border: 2px solid rgba(50,50,50,.6);
     display:none;
+    font-family: 'Long Cang', cursive;
 }
 #ruleBox img{
     width: 700px;
@@ -103,6 +107,8 @@ body{
     position: absolute;
     left: 350px;
     top: 370px;
+    font-family: 'Long Cang', cursive;
+
 }
 #ruleBox>button:hover{
     cursor: pointer;
@@ -117,6 +123,8 @@ body{
     position: absolute;
     border: 2px solid rgba(50,50,50,.6);
     display:none;
+    font-family: 'Long Cang', cursive;
+
 }
 /*头部*/
 #head{
@@ -142,13 +150,14 @@ body{
     height: 30px;
     line-height: 30px;
     border-bottom-right-radius: 14px;
-    font-family: "Long Cang";
     display: inline-block;
     margin: 0px;
     padding-right: 10px;
     background-color: rgba(50,50,50,.7);
     color: white;
     text-align: right;
+    font-family: 'Long Cang', cursive;
+
 }
 #hardIcon{
     width: 200px;
@@ -210,10 +219,46 @@ body{
     background-image: url(../img/footbg.png);
     background-size: cover;
     background-position:0px 420px;
+    font-family: 'Long Cang', cursive;
+
 }
 #dancerCtx{
     position: absolute;
 }
+/* 触摸键盘 */
+
+#controlButtons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+.controlButton {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin: 0 15px;
+    font-size: 30px;
+    text-align: center;
+    line-height: 50px;
+    background-color: white;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    font-family: 'Long Cang', cursive; /* 确保控制按钮使用正确字体 */
+}
+#buttonC, #buttonN {
+    background-color: rgb(0, 140, 255);
+    color: white;
+}
+#buttonV, #buttonB {
+    background-color: rgb(224, 86, 6);
+    color: white;
+}
+.controlButton:hover {
+    filter: brightness(1.2);
+}
+
 /*暂停*/
 #pausebutton{
     position: absolute;
@@ -229,6 +274,8 @@ body{
     border: none;
     border-radius: 5px;
     z-index: 12;
+    font-family: 'Long Cang', cursive;
+
 }
 #pausebutton:hover{
     cursor: pointer;
@@ -245,6 +292,7 @@ body{
     top: 0px;
     display: none;
 }
+
 #restartButton,#continueButton{
     margin-top: 50px;
     width: 300px;
@@ -252,11 +300,15 @@ body{
     line-height: 50px;
     font-size: 30px;
     text-align: center;
-    position: relative;
-    left: 170px;
+    position: absolute;
+    left: 350px;
+    top: 370px;
     background-color: white;
+    border-color: transparent;
     border-radius: 10px;
     outline: none;
+    font-family: 'Long Cang', cursive;
+
 }
 #restartButton:hover{
     cursor: pointer;
@@ -268,6 +320,8 @@ body{
     background-color: #f64826;
     color:white;
 }
+
+
 /*游戏结束界面*/
 #endBox{
     margin: 50px 200px;
@@ -280,6 +334,8 @@ body{
     background-image: url(../img/endbg.jpg);
     background-size: cover; 
     text-align: center;
+    font-family: 'Long Cang', cursive;
+
 }
 #firstIcon{
     width: 30px;
@@ -326,6 +382,8 @@ body{
     left: 390px;
     top: 350px;
     z-index: 20;
+    font-family: 'Long Cang', cursive;
+
 }
 #endBox>div:hover{
     cursor: pointer;

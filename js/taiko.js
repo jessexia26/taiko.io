@@ -30,9 +30,6 @@ var dancerMove;
 var dancerList=[];
 window.onload=function () {
     document.getElementById("bgmusic").play();
-    setTimeout(function () {
-        document.getElementById("title_call").play();
-    },500);
 }
 function gameStart() {
     username=document.getElementById("username").value;
@@ -135,64 +132,45 @@ function gameContinue() {
     document.getElementById("bg_travel").play();
 }
 
-//键盘敲下,触发鼓点音效及鼓面效果,检测是否击中鼓点
-window.onkeydown=function () {
-    //获取鼓点图片及鼓点音效
-    var taikored=document.getElementsByClassName("taikoRed");
-    var taikoblue=document.getElementsByClassName("taikoBlue");
-    var dong=document.getElementById("dongmusic");
-    var ka=document.getElementById("kamusic");
-    var k = window.event || arguments[0];
-    //C
-    if (k.keyCode == 67) {
+// 模拟键盘按键
+function simulateKeyPress(keyCode) {
+    var event = new KeyboardEvent('keydown', {
+        keyCode: keyCode,
+        which: keyCode
+    });
+    document.dispatchEvent(event);
+}
+
+// 处理键盘事件
+document.onkeydown = function(event) {
+    var taikored = document.getElementsByClassName("taikoRed");
+    var taikoblue = document.getElementsByClassName("taikoBlue");
+    var dong = document.getElementById("dongmusic");
+    var ka = document.getElementById("kamusic");
+
+    var key = event.keyCode;
+    if (key == 67) { // C键
         imgDisplay(taikoblue[0]);
-        ka.currentTime=0;
+        ka.currentTime = 0;
         ka.play();
-        //检测蓝鼓点
         taikoCheck("Blue");
-    }
-    //V
-    if (k.keyCode == 86) {
+    } else if (key == 86) { // V键
         imgDisplay(taikored[0]);
-        dong.currentTime=0;
+        dong.currentTime = 0;
         dong.play();
-        //检测红鼓点
         taikoCheck("Red");
-    }
-    //B
-    if (k.keyCode == 66) {
+    } else if (key == 66) { // B键
         imgDisplay(taikored[1]);
-        dong.currentTime=0;
+        dong.currentTime = 0;
         dong.play();
-        //检测红鼓点
         taikoCheck("Red");
-    }
-    //N
-    if (k.keyCode == 78) {
+    } else if (key == 78) { // N键
         imgDisplay(taikoblue[1]);
-        ka.currentTime=0;
+        ka.currentTime = 0;
         ka.play();
-        //检测蓝鼓点
         taikoCheck("Blue");
     }
-}
-window.onkeyup=function () {
-    var taikored=document.getElementsByClassName("taikoRed");
-    var taikoblue=document.getElementsByClassName("taikoBlue");
-    var k = window.event || arguments[0];
-    if (k.keyCode == 67) {
-        imgDisAppear(taikoblue[0]);
-    }
-    if (k.keyCode == 86) {
-        imgDisAppear(taikored[0]);
-    }
-    if (k.keyCode == 66) {
-        imgDisAppear(taikored[1]);
-    }
-    if (k.keyCode == 78) {
-        imgDisAppear(taikoblue[1]);
-    }
-}
+};
 function creatTaiko(ctx,imgnode) {
     var newTaiko;
     if(taikoValueList[taikoValueOrder]==0){
@@ -335,6 +313,7 @@ function judgement(a) {
         }
     }
 }
+/*
 //舞蹈人物
 function dancerPrototype(ctx,imgnode,drawX,time) {
     this.ctx=ctx;
@@ -371,7 +350,8 @@ function dancerGirltype(ctx,imgnode) {
             this.time=0;
         }
     }
-}
+} */
+
 //显示图片
 function imgDisplay(img) {
     img.style.display="block";

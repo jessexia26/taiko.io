@@ -42,11 +42,16 @@
     </div>
     <div id="foot">
         <div id="pauseChoice">
-        <button onclick="gamePlay()" id="restartButton">重新开始</button><br>
+        <button onclick="gamePlay()" id="restartButton">重新开始</button>
         <button onclick="gameContinue()" id="continueButton">继续游戏</button>
         </div>
         <button onclick="gamePause()" id="pausebutton">暂停</button>
-        <canvas id="dancerCtx" width="900" height="260"></canvas>
+        <div id="controlButtons">
+            <button class="controlButton" id="buttonC" onclick="simulateKeyPress(67)">C</button>
+            <button class="controlButton" id="buttonV" onclick="simulateKeyPress(86)">V</button>
+            <button class="controlButton" id="buttonB" onclick="simulateKeyPress(66)">B</button>
+            <button class="controlButton" id="buttonN" onclick="simulateKeyPress(78)">N</button>
+        </div>
     </div>
 </div>
 <div id="endBox">
@@ -69,7 +74,6 @@
     <audio src="audio/songs/少年画像.mp3" id="bg_travel"></audio>
     <audio src="audio/山雨欲来.mp3" id="bgmusic" loop="loop"></audio>
     <audio src="audio/玩游戏我可是认真的.m4a" id="gamestart"></audio>
-    <audio src="audio/title_call.m4a" id="title_call"></audio>
     <audio src="audio/dong.wav" id="dongmusic"></audio>
     <audio src="audio/ka.wav" id="kamusic"></audio>
     <audio src="audio/山雨欲来.mp3" id="endmusic"></audio>
