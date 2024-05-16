@@ -76,6 +76,7 @@ function gamePlay() {
         },60000/138);
         taikoMove=setInterval(function () {taikoListMove(roadCtx);},1);
     },770);
+    /*
     //舞蹈小人
     var dancerCtx=document.getElementById("dancerCtx").getContext("2d");
     var dancerTaikopng=document.getElementById("dancerTaiko");
@@ -101,6 +102,7 @@ function gamePlay() {
             dancerList[i].draw();
         }
     },120000/138/9);
+    */
     //音乐播放完毕后执行结束函数
     setTimeout(function () {
         gameEnd();

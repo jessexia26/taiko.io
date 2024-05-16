@@ -3,11 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Long+Cang&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/taiko.css">
 </head>
 <body>
 <div id="startBox">
-    <img src="img/title.png" alt="">
+    <img src="img/xia_title.png" alt="">
     <div>
         <input type="text" placeholder="请输入昵称" id="username">
         <h4></h4>
@@ -23,7 +26,7 @@
     <div id="middle">
         <div id="theIcon">
             <h1 id="scoreBoard">0</h1>
-            <img src="img/hardicon.png" alt="" id="hardIcon">
+            <img src="img/hardicon.gif" alt="" id="hardIcon">
             <img src="img/taiko.png" alt="" id="taikoIcon">
             <img src="img/taikoredleft.png" alt="" class="taikoRed">
             <img src="img/taikoblueleft.png" alt="" class="taikoBlue">
@@ -47,13 +50,13 @@
     </div>
 </div>
 <div id="endBox">
-    <h1>排行榜</h1>
+    <h1>最后得分</h1>
     <table id="scoreRank">
     <tr><td><div id="firstIcon"></div></td><td>暂无</td><td>暂无</td></tr>
     <tr><td><div id="secondIcon"></div></td><td>暂无</td><td>暂无</td></tr>
     <tr><td><div id="thirdIcon"></div></td><td>暂无</td><td>暂无</td></tr>
     </table>
-    <div onclick="gamePlay()">再玩一局</div>
+    <button onclick="gamePlay()" id="restartButton">再玩一局</button>
 
 </div>
 <div id="theSource">
@@ -63,13 +66,13 @@
     <img src="img/dancer_taiko.png" alt="" id="dancerTaiko">
     <img src="img/dancer_1.png" alt="" id="dancer_1">
     <img src="img/dancergirl.png" alt="" id="dancergirl">
-    <audio src="audio/bg_travel.mp3" id="bg_travel"></audio>
-    <audio src="audio/bgmusic.m4a" id="bgmusic" loop="loop"></audio>
-    <audio src="audio/gamestart.m4a" id="gamestart"></audio>
+    <audio src="audio/songs/少年画像.mp3" id="bg_travel"></audio>
+    <audio src="audio/山雨欲来.mp3" id="bgmusic" loop="loop"></audio>
+    <audio src="audio/玩游戏我可是认真的.m4a" id="gamestart"></audio>
     <audio src="audio/title_call.m4a" id="title_call"></audio>
     <audio src="audio/dong.wav" id="dongmusic"></audio>
     <audio src="audio/ka.wav" id="kamusic"></audio>
-    <audio src="audio/endmusic.m4a" id="endmusic"></audio>
+    <audio src="audio/山雨欲来.mp3" id="endmusic"></audio>
 </div>
 <script src="js/taiko.js"></script>
 </body>
