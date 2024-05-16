@@ -11,82 +11,84 @@ maximum-scale=1.0, user-scalable=no"/>
     <link rel="stylesheet" href="css/taiko.css">
 </head>
 <body>
-<div id="startBox">
-    <img src="img/title.png" alt="">
-    <div>
-        <input type="text" placeholder="请输入昵称" id="username">
-        <h4></h4>
-        <div onclick="gameStart()">开始游戏</div>
-    </div>
-</div>
-<div id="ruleBox">
-    <img src="img/rules.png" alt="">
-    <button onclick="gamePlay()">我知道啦~</button>
-</div>
-<div id="taikoBox">
-    <div id="head">
-        <div id="gameChoices">
-            <button onclick="gamePause()" id="pausebutton">暂停</button>
-            <button onclick="gameEnd()" id="stopbutton">停止</button>
-            <select id="songSelect"> 
-                <option value="song1">歌曲1</option>
-                <option value="song2">歌曲2</option>
-                <option value="song3">歌曲3</option>
-            </select>
+<content>
+    <div id="startBox">
+        <img src="img/title.png" alt="">
+        <div>
+            <input type="text" placeholder="请输入昵称" id="username">
+            <h4></h4>
+            <div onclick="gameStart()">开始游戏</div>
         </div>
     </div>
-    <div id="middle">
-        <div id="theIcon">
-            <h1 id="scoreBoard">0</h1>
-            <img src="img/hardicon.gif" alt="" id="hardIcon">
-            <img src="img/taiko.png" alt="" id="taikoIcon">
-            <img src="img/taikoredleft.png" alt="" class="taikoRed">
-            <img src="img/taikoblueleft.png" alt="" class="taikoBlue">
-            <img src="img/taikoredright.png" alt="" class="taikoRed">
-            <img src="img/taikoblueright.png" alt="" class="taikoBlue">
+    <div id="ruleBox">
+        <img src="img/rules.png" alt="">
+        <button onclick="gamePlay()">我知道啦~</button>
+    </div>
+    <div id="taikoBox">
+        <div id="head">
+            <div id="gameChoices">
+                <button onclick="gamePause()" id="pausebutton">暂停</button>
+                <button onclick="gameEnd()" id="stopbutton">停止</button>
+                <select id="songSelect"> 
+                    <option value="song1">歌曲1</option>
+                    <option value="song2">歌曲2</option>
+                    <option value="song3">歌曲3</option>
+                </select>
+            </div>
         </div>
-        <div id="theRoad">
-            <img src="img/taikoshadow.png" alt="">
-            <img src="img/taikosmile.png" alt="" id="taikoSmile">
-            <canvas id="roadCtx" width="645" height="120"></canvas>
-            <canvas id="judgementCtx" width="650" height="250"></canvas>
+        <div id="middle">
+            <div id="theIcon">
+                <h1 id="scoreBoard">0</h1>
+                <img src="img/hardicon.gif" alt="" id="hardIcon">
+                <img src="img/taiko.png" alt="" id="taikoIcon">
+                <img src="img/taikoredleft.png" alt="" class="taikoRed">
+                <img src="img/taikoblueleft.png" alt="" class="taikoBlue">
+                <img src="img/taikoredright.png" alt="" class="taikoRed">
+                <img src="img/taikoblueright.png" alt="" class="taikoBlue">
+            </div>
+            <div id="theRoad">
+                <img src="img/taikoshadow.png" alt="">
+                <img src="img/taikosmile.png" alt="" id="taikoSmile">
+                <canvas id="roadCtx" width="645" height="120"></canvas>
+                <canvas id="judgementCtx" width="650" height="250"></canvas>
+            </div>
+        </div>
+        <div id="foot">
+            <div id="pauseChoice">
+                <button onclick="gamePlay()" id="restartButton">重新开始</button><br>
+                <button onclick="gameContinue()" id="continueButton">继续游戏</button>
+            </div>
+            <div id="controlButtons">
+                <button class="controlButton" id="buttonC" onclick="simulateKeyPress(67)">C</button>
+                <button class="controlButton" id="buttonV" onclick="simulateKeyPress(86)">V</button>
+                <button class="controlButton" id="buttonB" onclick="simulateKeyPress(66)">B</button>
+                <button class="controlButton" id="buttonN" onclick="simulateKeyPress(78)">N</button>
+            </div>
+            <canvas id="dancerCtx" width="900" height="260"></canvas>
         </div>
     </div>
-    <div id="foot">
-        <div id="pauseChoice">
-            <button onclick="gamePlay()" id="restartButton">重新开始</button><br>
-            <button onclick="gameContinue()" id="continueButton">继续游戏</button>
+    <div id="endBox">
+        <h1>最后得分</h1>
+        <div id="scoreRank">
+            <!-- 这里会显示用户名、分数和音乐名称 -->
         </div>
-        <div id="controlButtons">
-            <button class="controlButton" id="buttonC" onclick="simulateKeyPress(67)">C</button>
-            <button class="controlButton" id="buttonV" onclick="simulateKeyPress(86)">V</button>
-            <button class="controlButton" id="buttonB" onclick="simulateKeyPress(66)">B</button>
-            <button class="controlButton" id="buttonN" onclick="simulateKeyPress(78)">N</button>
-        </div>
-        <canvas id="dancerCtx" width="900" height="260"></canvas>
+        <button onclick="gamePlay()" id="restartButton">再玩一局</button>
     </div>
-</div>
-<div id="endBox">
-    <h1>最后得分</h1>
-    <div id="scoreRank">
-        <!-- 这里会显示用户名、分数和音乐名称 -->
+    <div id="theSource">
+        <img src="img/taikocomb.png" alt="" id="taikoComb">
+        <img src="img/judgementText.png" alt="" id="judgementText">
+        <img src="img/judgementHalo.png" alt="" id="judgementHalo">
+        <img src="img/dancer_taiko.png" alt="" id="dancerTaiko">
+        <img src="img/dancer_1.png" alt="" id="dancer_1">
+        <img src="img/dancergirl.png" alt="" id="dancergirl">
+        <audio src="audio/songs/少年画像.mp3" id="bg_travel"></audio>
+        <audio src="audio/山雨欲来.mp3" id="bgmusic" loop="loop"></audio>
+        <audio src="audio/玩游戏我可是认真的.m4a" id="gamestart"></audio>
+        <audio src="audio/dong.wav" id="dongmusic"></audio>
+        <audio src="audio/ka.wav" id="kamusic"></audio>
+        <audio src="audio/山雨欲来.mp3" id="endmusic"></audio>
     </div>
-    <button onclick="gamePlay()" id="restartButton">再玩一局</button>
-</div>
-<div id="theSource">
-    <img src="img/taikocomb.png" alt="" id="taikoComb">
-    <img src="img/judgementText.png" alt="" id="judgementText">
-    <img src="img/judgementHalo.png" alt="" id="judgementHalo">
-    <img src="img/dancer_taiko.png" alt="" id="dancerTaiko">
-    <img src="img/dancer_1.png" alt="" id="dancer_1">
-    <img src="img/dancergirl.png" alt="" id="dancergirl">
-    <audio src="audio/songs/少年画像.mp3" id="bg_travel"></audio>
-    <audio src="audio/山雨欲来.mp3" id="bgmusic" loop="loop"></audio>
-    <audio src="audio/玩游戏我可是认真的.m4a" id="gamestart"></audio>
-    <audio src="audio/dong.wav" id="dongmusic"></audio>
-    <audio src="audio/ka.wav" id="kamusic"></audio>
-    <audio src="audio/山雨欲来.mp3" id="endmusic"></audio>
-</div>
-<script src="js/taiko.js"></script>
+    <script src="js/taiko.js"></script> 
+</content>
 </body>
 </html>
