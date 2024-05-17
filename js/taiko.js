@@ -1,6 +1,12 @@
 /**
  * Created by yuanyaoqi on 16/7/27.
  */
+
+database = {
+    '少年画像':[1,0,0,0,2,0,0,0,1,0,0,0,2,0,0,0,1,1,0,0,1,2,0,0,1,1,0,0,1,2,0,0,1,1,0,0,1,2,0,0,1,1,0,0,1,2,0,0,1,0,2,0,1,0,1,0,1,0,2,0,1,0,1,0,2,0,2,0,1,0,2,0,2,0,2,0,1,0,2,0,1,0,1,0,2,0,2,0,3,0,3,0,1,0,2,0,1,2,1,0,1,2,1,0,4,0,4,0,1,0,2,0,2,1,2,0,2,1,2,0,3,0,3,0,1,0,2,0,1,2,1,0,1,2,1,0,4,0,4,0,1,0,2,0,2,1,2,0,2,1,2,0,1,0,0,0,2,0,0,0,1,0,0,0,2,0,0,0],
+    '星之所向':[1,0,0,0,2,0,0,0,1,0,0,0,2,0,0,0,1,1,0,0,1,2,0,0,1,1,0,0,1,2,0,0,1,1,0,0,1,2,0,0,1,1,0,0,1,2,0,0,1,0,2,0,1,0,1,0,1,0,2,0,1,0,1,0,2,0,2,0,1,0,2,0,2,0,2,0,1,0,2,0,1,0,1,0,2,0,2,0,3,0,3,0,1,0,2,0,1,2,1,0,1,2,1,0,4,0,4,0,1,0,2,0,2,1,2,0,2,1,2,0,3,0,3,0,1,0,2,0,1,2,1,0,1,2,1,0,4,0,4,0,1,0,2,0,2,1,2,0,2,1,2,0,1,0,0,0,2,0,0,0,1,0,0,0,2,0,0,0],
+    '不会有时差':[1,0,0,0,2,0,0,0,1,0,0,0,2,0,0,0,1,1,0,0,1,2,0,0,1,1,0,0,1,2,0,0,1,1,0,0,1,2,0,0,1,1,0,0,1,2,0,0,1,0,2,0,1,0,1,0,1,0,2,0,1,0,1,0,2,0,2,0,1,0,2,0,2,0,2,0,1,0,2,0,1,0,1,0,2,0,2,0,3,0,3,0,1,0,2,0,1,2,1,0,1,2,1,0,4,0,4,0,1,0,2,0,2,1,2,0,2,1,2,0,3,0,3,0,1,0,2,0,1,2,1,0,1,2,1,0,4,0,4,0,1,0,2,0,2,1,2,0,2,1,2,0,1,0,0,0,2,0,0,0,1,0,0,0,2,0,0,0],
+}
 var username;
 var taikoList = []; // 鼓点数组
 // 鼓点类型常量
@@ -10,16 +16,7 @@ const RED_LARGE = 3;
 const BLUE_LARGE = 4;
 
 // 鼓点数值列表
-var taikoValueList = [
-    // 前奏
-    1, 0, 0, 0, 2, 0, 0, 0, 1, 0, 0, 0, 2, 0, 0, 0,
-    // 主歌
-    1, 1, 0, 0, 1, 2, 0, 0, 1, 1, 0, 0, 1, 2, 0, 0,
-    1, 1, 0, 0, 1, 2, 0, 0, 1, 1, 0, 0, 1, 2, 0, 0,
-    // 过渡
-    1, 0, 2, 0, 1, 0, 1, 0, 1, 0, 2, 0, 1, 0, 1, 0,
-    // 继续...
-];
+var taikoValueList = updateSongText('少年画像');
 
 // 鼓点次序
 var taikoValueOrder = 0;
@@ -27,6 +24,7 @@ var scoreNumber = 0; // 分数
 var taikoCreat, taikoMove;
 var dancerList = [];
 var taikoEnd = false;
+
 var bgTravel = document.getElementById("bg_travel");
 var songName = "少年画像";
 var scoreRecord = {
@@ -58,7 +56,7 @@ function gameStart() {
 }
 
 // 游戏玩法
-function gamePlay() {
+function gamePlay(songParsed = '少年画像') {
     document.getElementById("ruleBox").style.display = "none";
     document.getElementById("startBox").style.display = "none";
     document.getElementById("endBox").style.display = "none";
@@ -70,8 +68,19 @@ function gamePlay() {
     clearInterval(taikoCreat);
     clearInterval(taikoMove);
     scoreNumber = 0;
+    stopBgTravel();
+
     document.getElementById("scoreBoard").innerHTML = scoreNumber;
     document.getElementById("pauseChoice").style.display = "none";
+    // 
+    updateBgTravel(songParsed);
+    scoreRecord = {
+        "username":null,
+        "score": 0,
+        "song":songParsed
+    };
+    songName = songParsed;
+    taikoValueList = updateSongText(songParsed);
     // 背景音乐
     document.getElementById("bgmusic").pause();
     document.getElementById("endmusic").pause();
@@ -370,6 +379,45 @@ function queryScore() {
     document.getElementById("finalScore").textContent = "最后得分:  " + scoreRecord["score"];
     document.getElementById("songName").textContent = "歌曲名:  " + scoreRecord["song"];   
 }
+
+// 换歌
+// Function to stop and reset bgTravel audio
+function stopBgTravel() {
+    if ((bgTravel.paused ==false)|| (bgTravel.currentTime!=0)){
+        bgTravel.pause();
+        bgTravel.currentTime = 0;
+    }
+}
+
+// Function to update bgTravel with new audio file
+function updateBgTravel(value) {
+    console.log(value)
+    bgTravel.src = './songs/' + value + '.mp3';
+}
+
+function updateSongText(value) {
+    console.log(database[value])
+    return database[value]
+}
+
+function changeSong(event) {
+    var selectedOption = event.target.selectedOptions[0];
+    var selectedValue = selectedOption.value;
+    var selectedText = selectedOption.textContent;
+
+    console.log('Selected value:', selectedValue);
+    console.log('Selected text:', selectedText);
+    return gamePlay(selectedText)
+}
+
+// Adding event listener to the select element
+document.addEventListener('DOMContentLoaded', function () {
+    var selectElement = document.getElementById('songSelect');
+    selectElement.addEventListener('change', changeSong);
+});
+
+
+
 function isMobile() { 
     if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
         return true;

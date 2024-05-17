@@ -106,6 +106,17 @@ body {
     display: none;
     font-family: 'Long Cang', cursive; /* 确保规则框使用正确字体 */
 }
+#ruleBox > div {
+    font-size: 20px;
+    line-height: 40px;
+    text-align: center;
+    font-weight: 100;
+    background-color: transparent;
+    color: white;
+    border-radius: 10px;
+    border-color: transparent;
+    margin: auto 0; /* Center vertically */
+}
 #ruleBox img {
     width: 700px;
     margin: 20px 100px;
@@ -123,7 +134,7 @@ body {
     border-color: transparent;
     position: absolute;
     left: 350px;
-    top: 370px;
+    top: 400px;
     font-family: 'Long Cang', cursive; /* 确保按钮使用正确字体 */
 }
 #ruleBox > button:hover {
