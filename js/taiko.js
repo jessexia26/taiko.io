@@ -28,11 +28,16 @@ var taikoCreat, taikoMove;
 var dancerList = [];
 var taikoEnd = false;
 var bgTravel = document.getElementById("bg_travel");
+var songName = "少年画像";
+var scoreRecord = {
+    "username":null,
+    "score": 0,
+    "song":songName
+};
 
 // 页面加载后播放背景音乐
 window.onload = function() {
-    updateOrientation();
-    document.getElementById("bgmusic").play();
+    // updateOrientation();
     bgTravel.addEventListener('ended', function() {
         // 检查 taikoEnd 是否为 true
         if (taikoEnd === true) {
@@ -41,8 +46,6 @@ window.onload = function() {
         }
     }, false);
 };
-window.onresize = updateOrientation();
-
 // 开始游戏
 function gameStart() {
     username = document.getElementById("username").value;
@@ -355,38 +358,17 @@ function gameEnd() {
 
 // 保存用户分数
 function saveScore() {
-    var db = openDatabase("demo100", "", "", 1024 * 1024 * 10);
-    db.transaction(function(tx) {
-        tx.executeSql("create table if not exists scoreRank(username varchar(50), score varchar(50), musicname varchar(50))");
-    }, function(trans, err) {
-        console.log(err);
-    });
-    db.transaction(function(tx) {
-        tx.executeSql("insert into scoreRank values(?, ?, ?)", [username, scoreNumber, "少年画像"]);
-    }, function(trans, err) {
-        console.log(trans);
-        console.log(err);
-    }, function(success) {
-        console.log(success);
-    });
+    scoreRecord["username"] = username;
+    scoreRecord["song"] = songName;
+    scoreRecord["score"] = scoreNumber;
 }
 
 // 获取排行榜
 function queryScore() {
-    var db = openDatabase("demo100", "", "", 1024 * 1024 * 10);
-    db.transaction(function(tx) {
-        tx.executeSql("select * from scoreRank order by score desc", [], function(trans, rs) {
-            console.log(rs.rows.length);
-            if (rs.rows.length == 0) {
-                document.getElementById("scoreRank").innerHTML = '<p>暂无记录</p>';
-            } else {
-                document.getElementById("scoreRank").innerHTML = '';
-                for (var i = 0; i < rs.rows.length; i++) {
-                    document.getElementById("scoreRank").innerHTML += '<p>用户名: ' + rs.rows[i].username + ', 分数: ' + rs.rows[i].score + ', 音乐: ' + rs.rows[i].musicname + '</p>';
-                }
-            }
-        });
-    });
+    saveScore();
+    document.getElementById("user_name").textContent = "用户名:  " + scoreRecord["username"];
+    document.getElementById("finalScore").textContent = "最后得分:  " + scoreRecord["score"];
+    document.getElementById("songName").textContent = "歌曲名:  " + scoreRecord["song"];   
 }
 function isMobile() { 
     if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
