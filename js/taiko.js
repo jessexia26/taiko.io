@@ -447,3 +447,8 @@ function isMobile() {
         }
     }
 }
+const menuButton = document.getElementById('menu');
+menuButton.addEventListener('click', (event) =>  {
+    event.stopPropagation();
+    window.location.href = 'https://jessexia-0526.wixstudio.io/jesse/studio';
+  });
